@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>SVG Pyramid: Polygon and Gradient</title>
+		<style>
+			body {
+				text-align: center;
+				font-family: Tahoma, Sans-serif;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<h1>SVG Pyramid: Polygon and Gradient</h1>
+
+		<svg width="600" height="600" style="background-color: #ffffff;">
+			<!-- http://www.w3schools.com/svg/svg_grad_linear.asp -->
+			<defs>
+				<linearGradient id="vert_yellow_red" x1="0%" y1="0%" x2="0%" y2="100%">
+					<stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+					<stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+				</linearGradient>
+
+				<linearGradient id="vert_brown" x1="0%" y1="0%" x2="0%" y2="100%">
+					<stop offset="0%" style="stop-color:rgb(156,98,50);stop-opacity:1" />
+					<stop offset="100%" style="stop-color:rgb(92,36,9);stop-opacity:1" />
+				</linearGradient>
+
+				<linearGradient id="hor_brown" x1="0%" y1="0%" x2="100%" y2="0%">
+					<stop offset="0%" style="stop-color:rgb(156,98,50);stop-opacity:1" />
+					<stop offset="100%" style="stop-color:rgb(92,36,9);stop-opacity:1" />
+				</linearGradient>
+			</defs>
+
+			<!--  sky -->
+			<rect x="0" y="0" width="600" height="400" fill="url(#vert_yellow_red)" />
+
+			<!-- ground -->
+			<rect x="0" y="400" width="600" height="200" fill="url(#vert_brown)" />
+
+			<!-- pyramid -->
+			<!-- http://www.w3schools.com/svg/svg_polygon.asp -->
+			<polygon points="300,500 200,450 350,240" fill="url(#hor_brown)" />
+			<polygon points="300,500 550,450 350,240" fill="url(#hor_brown)" />
+		</svg>
+	</body>
+
+</html>

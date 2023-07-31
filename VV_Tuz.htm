@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>After Victor Vasarely's TUZ</title>
+		<style>
+			:root {
+				--HALF_SIZE: 300px;
+				--rot_ang: 20deg;
+			}
+
+			body {
+				text-align: center;
+				font-family: Tahoma, Sans-serif;
+			}
+
+			.clock {
+				transform: rotate(var(--rot_ang));
+				transform-origin: var(--HALF_SIZE) var(--HALF_SIZE);
+			}
+
+			.counter {
+				transform: rotate(calc(360deg - var(--rot_ang)));
+				transform-origin: var(--HALF_SIZE) var(--HALF_SIZE);
+			}
+
+			svg {
+				width: calc(2*var(--HALF_SIZE));
+				height: calc(2*var(--HALF_SIZE));
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>After Victor Vasarely's TUZ</h1>
+		<p>Uses CSS variables and calculations. Works in Chrome.</p>
+		<svg id="mySVG" style="background-color: #000000;"></svg>
+		<script>
+
+			// adapted from http://stackoverflow.com/questions/12786797/how-to-draw-rectangles-dynamically-in-svg
+			var svgns = "http://www.w3.org/2000/svg";
+
+			const CENTER = parseInt(window.getComputedStyle(document.documentElement).getPropertyValue('--HALF_SIZE'));
+			let N = 3;
+			const DELTA = 50;
+
+			for (let x = -N * DELTA; x < N * DELTA; x += DELTA) {
+				for (let y = -N * DELTA; y < N * DELTA; y += DELTA) {
+
+					let myCirc = document.createElementNS(svgns, 'circle');
+					myCirc.setAttributeNS(null, 'cx', CENTER + x + DELTA / 2);
+					myCirc.setAttributeNS(null, 'cy', CENTER + y + DELTA / 2);
+					myCirc.setAttributeNS(null, 'r', '20');
+					myCirc.setAttributeNS(null, 'fill', 'none');
+					myCirc.setAttributeNS(null, 'stroke', 'white');
+					myCirc.setAttributeNS(null, 'stroke-width', 3);
+					myCirc.setAttributeNS(null, 'class', 'clock');
+					document.getElementById('mySVG').appendChild(myCirc);
+
+					myCirc = document.createElementNS(svgns, 'circle');
+					myCirc.setAttributeNS(null, 'cx', CENTER + x + DELTA / 2);
+					myCirc.setAttributeNS(null, 'cy', CENTER + y + DELTA / 2);
+					myCirc.setAttributeNS(null, 'r', '20');
+					myCirc.setAttributeNS(null, 'fill', 'none');
+					myCirc.setAttributeNS(null, 'stroke', 'white');
+					myCirc.setAttributeNS(null, 'stroke-width', 3);
+					myCirc.setAttributeNS(null, 'class', 'counter');
+					document.getElementById('mySVG').appendChild(myCirc);
+				}
+			}
+
+			setInterval(rotate_design, 100);
+
+			function rotate_design() {
+				let ang = window.getComputedStyle(document.documentElement).getPropertyValue('--rot_ang'); //get angle property
+				ang = parseInt(ang); //take off unit
+				ang++;
+				document.documentElement.style.setProperty('--rot_ang', ang + 'deg');  //restore unit to angle property and set 
+			}
+
+		</script>
+	</body>
+
+</html>
